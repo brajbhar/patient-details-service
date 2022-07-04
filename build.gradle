@@ -24,6 +24,9 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.1.0'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 
@@ -37,7 +40,12 @@ dependencies {
 	// https://mvnrepository.com/artifact/io.r2dbc/r2dbc-h2
 	testImplementation group: 'io.r2dbc', name: 'r2dbc-h2', version: '0.9.1.RELEASE'
 
+}
 
+compileJava {
+	options.compilerArgs += [
+			'-Amapstruct.defaultComponentModel=spring'
+	]
 }
 
 tasks.named('test') {
